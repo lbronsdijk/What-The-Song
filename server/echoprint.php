@@ -20,5 +20,3 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 $result = curl_exec($ch);
 
 var_dump($result);
-
-//lalalala
