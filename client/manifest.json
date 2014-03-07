@@ -1,0 +1,37 @@
+{
+    "AppName": {
+        "en": "My Playlist"
+    },
+    "BundleIdentifier": "project-03",
+    "AppDescription": {
+        "en": "My playlist is a memory game you can play alone or with your facebook friends."
+    },
+    "AppIcon": {
+        "18x18": "img/icons/icon-18x18.png",
+        "32x32": "img/icons/icon-32x32.png",
+        "64x64": "img/icons/icon-64x64.png",
+        "128x128": "img/icons/icon-128x128.png",
+        "300x300": "img/icons/icon-300x300.png"
+    },
+    "AcceptedLinkTypes": [
+        "playlist"
+    ],
+    "BundleType": "Application",
+    "BundleVersion": "0.0.1",
+    "Dependencies": {
+        "api": "1.0.0",
+        "views": "1.0.0"
+    },
+    "RequiredInterface": 1,
+    "RequiredPermissions": [
+        "http://api.twitter.com",
+        "https://graph.facebook.com",
+        "https://gist.github.com/",
+        "http://prj03:8888",
+        "http://lloydkeijzer.nl"
+    ],
+    "SupportedLanguages": [
+        "en"
+    ],
+    "VendorIdentifier": "nl.lloydkeijzer"
+}

@@ -1,0 +1,116 @@
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+
+/* #Site Styles
+================================================== */
+
+.transition {
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-o-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+}
+
+.rounded 		{ border-radius: 5px; }
+.rounded-medium { border-radius: 4px; }
+.rounded-small 	{ border-radius: 3px; }
+.circle			{ border-radius: 120px; }
+
+.shadow {
+	-moz-box-shadow: 0 0 31px rgba(0,0,0,.26);
+	-webkit-box-shadow: 0 0 31px rgba(0,0,0,.26);
+	box-shadow: 0 0 31px rgba(0,0,0,.26);
+}
+.shadow-small {
+	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.08);
+	-moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.08);
+	box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.08);
+}
+.blur {
+	filter: blur(20px);
+	filter: url(/assets/img/blur.svg#gaussian_blur);
+    -webkit-filter: blur(20px);
+}
+
+.container {
+	position: relative;
+	margin: 0 auto; 
+	padding: 0;
+	width: 800px;
+	text-align: center;
+}
+
+button.record {
+	width: 235px;
+	height: 235px;
+	background: url(/assets/img/microphone@1x.png) center center no-repeat #fc4a4b;
+}
+
+
+.progress-wrapper {
+	width: 100px; /* Set the size of the progress bar */
+	height: 100px;
+	position: absolute; /* Enable clipping */
+	clip: rect(0px, 100px, 100px, 50px); /* Hide half of the progress bar */
+}
+/* Set the sizes of the elements that make up the progress bar */
+.progress-radial {
+	width: 80px;
+	height: 80px;
+	border: 10px solid green;
+	border-radius: 50px;
+	position: absolute;
+	clip: rect(0px, 50px, 100px, 0px);
+}
+
+/* Using the data attributes for the animation selectors. */
+/* Base settings for all animated elements */
+div[data-anim~=progress-base] {
+	-webkit-animation-iteration-count: 1;  /* Only run once */
+	-webkit-animation-fill-mode: forwards; /* Hold the last keyframe */
+	-webkit-animation-timing-function:linear; /* Linear animation */
+}
+
+.progress-radial[data-anim~=progress-wrapper] {
+	-webkit-animation-duration: 0.01s; /* Complete keyframes asap */
+	-webkit-animation-delay: 5s; /* Wait half of the animation */
+	-webkit-animation-name: wrapper-close; /* Keyframes name */
+}
+
+.progress-radial[data-anim~=progress-left] {
+	-webkit-animation-duration: 10s; /* Full animation time */
+	-webkit-animation-name: left-spin;
+}
+
+.progress-radial[data-anim~=progress-right] {
+	-webkit-animation-duration: 5s; /* Half animation time */
+	-webkit-animation-name: right-spin;
+}
+
+
+
+
+/* #Retina
+================================================== */
+
+@media only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+	nav ul li a span.icon { background-image: url(/static/img/nav_icons_2x.png); background-size: 86px 26px; }
+}
+
+/* #Retina
+================================================== */
+
+@font-face {
+    font-family: 'Dakota';
+    src: url('/assets/fonts/dakota/dakota-regular-webfont.eot');
+    src: url('/assets/fonts/dakota/dakota-regular-webfont.eot?iefix') format('eot'),
+         url('/assets/fonts/dakota/dakota-regular-webfont.woff') format('woff'),
+         url('/assets/fonts/dakota/dakota-regular-webfont.ttf') format('truetype'),
+         url('/assets/fonts/dakota/dakota-regular-webfont.svg#webfontZam02nTh') format('svg');
+    font-weight: normal;
+    font-style: normal; 
+}
