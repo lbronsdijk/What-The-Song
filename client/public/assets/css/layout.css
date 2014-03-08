@@ -26,9 +26,9 @@
 	box-shadow: 0 0 31px rgba(0,0,0,.26);
 }
 .shadow-small {
-	-webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.08);
-	-moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.08);
-	box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.08);
+	-webkit-box-shadow: 0 2px 1px rgba(0,0,0,.29);
+	-moz-box-shadow: 0 2px 1px rgba(0,0,0,.29);
+	box-shadow: 0 2px 1px rgba(0,0,0,.29);
 }
 .shadow-text { text-shadow: 0 2px 1px rgba(0,0,0,.29); }
 
@@ -38,9 +38,12 @@
     -webkit-filter: blur(20px);
 }
 
+.icon 		{ display: inline-block; background-repeat: none; }
+.icon.user 	{ background-image: url(/assets/img/user-small@1x.png); width: 11px; height: 10px; }
+
 .container {
 	position: relative;
-	margin: 0 auto; 
+	margin: 0 auto;
 	padding: 0;
 	margin-top: 150px;
 	width: 800px;
@@ -51,15 +54,16 @@ button.record {
 	width: 240px;
 	height: 240px;
 	background: url(/assets/img/microphone@1x.png) center center no-repeat #fc4a4b;
+	overflow: hidden;
 }
 
 .progress-wrapper {
 	position: absolute;
 	display: none;
 	width: 240px;
-	height: 2400px;
+	height: 240px;
 	left: 280px;
-	top: 64px;
+	top: 120px;
 	clip: rect(0px, 240px, 240px, 120px);
 }
 .progress-radial {
@@ -99,9 +103,12 @@ footer {
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box; 
 }
-footer .logo { float: left; font-size: 24px; text-transform: uppercase; font-weight: 300; }
-footer .logo strong { font-weight: 600; }
-footer .user-searches { float: right; }
+footer .logo 					{ float: left; font-size: 24px; text-transform: uppercase; font-weight: 300; }
+footer .logo strong 			{ font-weight: 600; }
+footer .user-searches 			{ float: right; text-align: right; margin-top: -13px; }
+footer .user-searches .icon 	{ margin-right: 2px; }
+footer .user-searches .heading 	{ text-transform: uppercase; font-size: 14px; }
+footer .user-searches .song 	{ display: block; font-size: 18px; font-weight: 700; }
 
 
 /* #Retina
