@@ -1,5 +1,4 @@
-/* Rotate the right side of the progress bar from 0 to 180 degrees */
-@-webkit-keyframes right-spin {
+@-webkit-keyframes progress-right-spin {
 	from {
 		-webkit-transform: rotate(0deg);
 	}
@@ -7,8 +6,7 @@
 		-webkit-transform: rotate(180deg);
 	}
 }
-/* Rotate the left side of the progress bar from 0 to 360 degrees */
-@-webkit-keyframes left-spin {
+@-webkit-keyframes progress-left-spin {
 	from {
 		-webkit-transform: rotate(0deg);
 	}
@@ -16,8 +14,7 @@
 		-webkit-transform: rotate(360deg);
 	}
 }
-/* Set the wrapper clip to auto, effectively removing the clip */
-@-webkit-keyframes wrapper-close {
+@-webkit-keyframes progress-wrapper-close {
 	to {
 		clip: rect(auto, auto, auto, auto);
 	}

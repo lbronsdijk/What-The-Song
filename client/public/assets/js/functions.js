@@ -1,9 +1,11 @@
 $(document).ready(function()
 {
-    initSubmitValue();
+    initCaptureAnimate();
 
-    function initSubmitValue() 
+    function initCaptureAnimate() 
     {
-        $("#_submit").attr('value', 'Verstuur');
+		$('button.record').click(function() {
+			$('.progress-wrapper').css('display', 'block');
+		})
     }
 })
