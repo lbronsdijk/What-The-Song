@@ -15,9 +15,9 @@ $(document).ready(function(){
 
             var dataCalls = new DataCallsModel();
 
-            dataCalls.login('test', 'test', function(data){
+            dataCalls.accountFromFacebookID('100001566806807', function(data){
 
-                alert('user: ' + data.user + ' pass: ' + data.pass);
+                alert('name: ' + data.name + ' email: ' + data.email);
 
             }, function(errorThrown){
 

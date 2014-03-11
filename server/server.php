@@ -1,18 +1,27 @@
 <?php
 
+//require files
+
+require_once 'connection.php';
+
 //validation check
 
 if(isset($_POST['call']) === false || empty($_POST['call']) === true){
 
-    echo json_encode(array('error' => 'No data call requested'));
-    exit;
+    error('No data call requested');
 }
 
 //data calls
 
-function loginDataCall($user, $pass){
+function accountFromFacebookID($fbid){
 
-    echo json_encode(array('user' => $user, 'pass' => $pass));
+    $account = selectQuery(
+        'SELECT * FROM accounts WHERE fbid=:fbid',
+        array(':fbid' => $fbid),
+        false
+    );
+
+    response(array('fbid' => $account->fbid, 'name' => $account->name, 'email' => $account->email));
 }
 
 //call processor
@@ -20,12 +29,24 @@ function loginDataCall($user, $pass){
 switch($_POST['call']){
 
     default:
-        echo json_encode(array('error' => 'Invalid data call'));
-        exit;
-
-    case 'login':
-        $user = $_POST['data']['user'];
-        $pass = $_POST['data']['pass'];
-        loginDataCall($user, $pass);
+        error('Invalid data call');
         break;
+
+    case 'accountFromFacebookID':
+        $fbid = $_POST['data']['fbid'];
+        accountFromFacebookID($fbid);
+        break;
+}
+
+// server response
+
+function response($data){
+
+    echo json_encode($data);
+    exit;
+}
+
+function error($message){
+
+    response(array('error' => $message));
 }
