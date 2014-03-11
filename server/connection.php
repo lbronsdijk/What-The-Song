@@ -22,7 +22,7 @@ function getPDOInstance() {
     }
 }
 
-function selectQuery($query, $variables = null, $class = null){
+function selectQuery($query, $variables = null, $multiple = true, $class = null){
 
     $pdo = getPDOInstance();
 
@@ -37,7 +37,7 @@ function selectQuery($query, $variables = null, $class = null){
 
         if($class != null && class_exists($class)){
 
-            $result = $statement->fetchAll(\PDO::FETCH_CLASS, $class);
+            $result = $multiple ? $statement->fetchAll(\PDO::FETCH_CLASS, $class) : $statement->fetch(\PDO::FETCH_CLASS, $class);
 
         } elseif($class != null && !class_exists($class)){
 
@@ -45,7 +45,7 @@ function selectQuery($query, $variables = null, $class = null){
 
         } else {
 
-            $result = $statement->fetchAll(\PDO::FETCH_OBJ);
+            $result = $multiple ? $statement->fetchAll(\PDO::FETCH_OBJ) : $statement->fetch(\PDO::FETCH_OBJ);
         }
 
     } catch (\PDOException $e) {

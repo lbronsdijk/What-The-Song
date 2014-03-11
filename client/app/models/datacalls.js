@@ -1,16 +1,16 @@
 function DataCallsModel(){
 
     // server url is a php file that handles data call requests
-    var serverURL = 'http://prj03:8888/server.php';
+    var serverURL = 'http://wts:8888/server/server.php';
 
     /*
      / login data call
      / retrieves user data
      / parameters needed: user(string), pass(string)
     */
-    this.login = function login(user, pass, sHandler, eHandler){
+    this.accountFromFacebookID = function accountFromFacebookID(fbid, sHandler, eHandler){
 
-        dataCall('login', {user: user, pass: pass}, sHandler, eHandler);
+        dataCall('accountFromFacebookID', {fbid: fbid}, sHandler, eHandler);
     };
 
     /*
