@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 11 mrt 2014 om 09:50
+-- Genereertijd: 11 mrt 2014 om 10:22
 -- Serverversie: 5.5.33
 -- PHP-versie: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Databank: `spotify`
@@ -27,11 +21,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `fbid` int(11) NOT NULL,
+  `fbid` varchar(25) COLLATE utf8_bin NOT NULL,
   `name` varchar(50) COLLATE utf8_bin NOT NULL,
   `email` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`fbid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `accounts`
+--
+
+INSERT INTO `accounts` (`fbid`, `name`, `email`) VALUES
+('100001566806807', 'Lloyd Keijzer', 'lloyd_msn@live.nl');
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `artist` (
 --
 
 CREATE TABLE IF NOT EXISTS `search` (
-  `fbid` int(11) NOT NULL,
+  `fbid` varchar(25) COLLATE utf8_bin NOT NULL,
   `tid` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY `search.fbid` (`fbid`),
@@ -83,15 +84,11 @@ CREATE TABLE IF NOT EXISTS `tracks` (
 -- Beperkingen voor tabel `search`
 --
 ALTER TABLE `search`
-  ADD CONSTRAINT `search_ibfk_2` FOREIGN KEY (`tid`) REFERENCES `tracks` (`tid`),
-  ADD CONSTRAINT `search_ibfk_1` FOREIGN KEY (`fbid`) REFERENCES `accounts` (`fbid`);
+  ADD CONSTRAINT `search_ibfk_3` FOREIGN KEY (`fbid`) REFERENCES `accounts` (`fbid`),
+  ADD CONSTRAINT `search_ibfk_2` FOREIGN KEY (`tid`) REFERENCES `tracks` (`tid`);
 
 --
 -- Beperkingen voor tabel `tracks`
 --
 ALTER TABLE `tracks`
   ADD CONSTRAINT `tracks_ibfk_1` FOREIGN KEY (`aid`) REFERENCES `artist` (`aid`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
