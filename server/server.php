@@ -8,7 +8,7 @@ require_once 'connection.php';
 
 if(isset($_POST['call']) === false || empty($_POST['call']) === true){
 
-    response(array('error' => 'No data call requested'));
+    error('No data call requested');
 }
 
 //data calls
@@ -29,7 +29,7 @@ function accountFromFacebookID($fbid){
 switch($_POST['call']){
 
     default:
-        response(array('error' => 'Invalid data call'));
+        error('Invalid data call');
         break;
 
     case 'accountFromFacebookID':
@@ -44,4 +44,9 @@ function response($data){
 
     echo json_encode($data);
     exit;
+}
+
+function error($message){
+
+    response(array('error' => $message));
 }
