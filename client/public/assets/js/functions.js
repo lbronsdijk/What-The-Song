@@ -4,10 +4,12 @@ $(document).ready(function()
     initLandingAnimate();
     initCaptureAnimate();
     initOtherUsers();
+    initToggles();
     
     function initLandingAnimate() 
     {
         $('h1').addClass('animated fadeInDown');
+        $('.notice').addClass('animated fadeIn');
     }
 
     function initCaptureAnimate() 
@@ -17,7 +19,9 @@ $(document).ready(function()
 
             setTimeout(function() {
                 $('h1').removeClass('fadeInDown');
+                $('.notice').removeClass('fadeIn');
                 $('h1').addClass('fadeOutUp');
+                $('.notice').addClass('fadeOut');
                 $('.progress-wrapper').fadeOut('fast', function() {
                     $('button.record').addClass('animated flipOutY');
                 })
@@ -41,5 +45,15 @@ $(document).ready(function()
         }
         
         showNextSong();
+    }
+
+    function initToggles()
+    {
+        $('button.play, span.player-controls').click(function(){
+            $('.player-controls').toggleClass('pause');
+        })
+        $('.star').click(function(){
+            $(this).toggleClass('active');
+        })
     }
 })

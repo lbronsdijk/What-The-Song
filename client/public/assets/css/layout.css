@@ -49,7 +49,12 @@
 .icon.player-controls.play   { background-position: left; }
 .icon.player-controls.pause  { background-position: right; }
 .icon.listen                 { background-image: url(/assets/img/listen@1x.png); width: 16px; height: 14px; }
-
+.icon.star                   { background-image: url(/assets/img/star@1x.png); width: 19px; height: 19px; }
+.icon.star.active            { background-image: url(/assets/img/star_active@1x.png); }
+.icon.rank                   { background-image: url(/assets/img/rank@1x.png); width: 13px; height: 15px; }
+.icon.share                  { background-image: url(/assets/img/share@1x.png); width: 20px; height: 16px; }
+.icon.video                  { background-image: url(/assets/img/video@1x.png); width: 17px; height: 15px; }
+.icon.duration               { background-image: url(/assets/img/duration@1x.png); width: 15px; height: 15px; }
 
 .container {
     position: relative;
@@ -110,6 +115,22 @@ div[data-anim~=progress-base] {
     -webkit-animation-name: progress-right-spin;
 }
 
+.notice {
+    position: absolute;
+    top: 240px;
+    right: 20px;
+    font: 30px "Dakota", Arial;, Arial, sans-serif;
+    color: #FFF;
+    height: 170px;
+    width: 200px;
+    padding-top: 100px;
+    padding-left: 25px;
+    background: url(/assets/img/arrow@1x.png) top left no-repeat;
+    text-align: left;
+}
+.notice span { display: block; line-height: 32px; }
+.notice .subline { font-size: 18px; }
+
 .musicbox {
     position: relative;
     margin: 0 auto;
@@ -119,14 +140,24 @@ div[data-anim~=progress-base] {
     overflow: hidden;
     text-align: initial;
 }
-.musicbox header    { float: left; height: 240px; }
-.musicbox .main     { float: left; height: 90px; width: 100%; background: #fc4a4b; overflow: visible; }
-.musicbox .artwork  { float: left; margin: -67px 0px 0px 30px; border: 6px solid #FFF; }
-.musicbox p         { float: left; color: #FFF; font-weight: 700; margin: 18px 0px 0px 33px; line-height: 22px; }
-.musicbox p .artist { font-size: 14px; text-transform: uppercase; display: block; margin-left: 27px; }
-.musicbox p .track  { font-size: 22px; text-transform: initial; }
-.musicbox p .listen { margin-right: 11px; }
-.musicbox footer    { float: left; position: initial; height: 45px; padding: 0; background: #21e4b8; }
+.musicbox header                { float: left; height: 240px; }
+.musicbox .main                 { float: left; height: 90px; width: 100%; background: #fc4a4b; overflow: visible; }
+.musicbox .artwork              { float: left; margin: -67px 0px 0px 30px; border: 6px solid #FFF; }
+.musicbox p                     { float: left; color: #FFF; font-weight: 700; margin: 18px 0px 0px 33px; line-height: 22px; }
+.musicbox p .artist             { font-size: 14px; text-transform: uppercase; display: block; margin-left: 27px; }
+.musicbox p .track              { font-size: 22px; text-transform: initial; }
+.musicbox p .listen             { margin-right: 11px; }
+.musicbox footer                { float: left; position: initial; height: 45px; padding: 0; background: #21e4b8; }
+.musicbox footer ul             { padding: 14px 30px; }
+.musicbox footer li             { display: inline-block; margin-right: 20px; color: #054d3d; font-size: 12px; font-weight: 700; }
+.musicbox footer li:last-child  { margin-right: 0; }
+.musicbox footer .icon.duration { margin-bottom: -3px; margin-right: 8px; }
+.musicbox footer .icon.rank     { margin-bottom: -3px; margin-right: 8px; }
+.musicbox footer .pull-right    { padding-top: 11px; }
+.musicbox footer .icon.star     { margin-bottom: 0px; }
+.musicbox footer .icon.share    { margin-bottom: 1px; }
+.musicbox footer .icon.video    { margin-bottom: 1px; }
+
 
 footer { 
     position: absolute; 
@@ -152,6 +183,12 @@ footer .user-searches .song     { display: none; font-size: 18px; font-weight: 7
 @media only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
     .icon.user              { background-image: url(/assets/img/user-small@2x.png); background-size: 11px 10px; }
     .icon.player-controls   { background-image: url(/assets/img/player-controls@2x.png); background-size: 17px 23px; }
+    .icon.listen            { background-image: url(/assets/img/listen@2x.png); background-size: 16px 14px; }
+    .icon.star              { background-image: url(/assets/img/star@2x.png); background-size: 19px 19px; }
+    .icon.rank              { background-image: url(/assets/img/rank@2x.png); background-size: 13px 15px; }
+    .icon.share             { background-image: url(/assets/img/share@2x.png); background-size: 20px 16px; }
+    .icon.video             { background-image: url(/assets/img/video@2x.png); background-size: 17px 15px; }
+    .icon.duration          { background-image: url(/assets/img/duration@2x.png); background-size: 15px 15px; }
 }
 
 /* #Retina
