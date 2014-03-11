@@ -9,10 +9,10 @@
 ================================================== */
 
 .transition {
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .rounded        { border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
@@ -71,6 +71,8 @@ button.record {
     background: url(/assets/img/microphone@1x.png) center center no-repeat #fc4a4b;
     overflow: hidden;
 }
+button.record:hover,
+button.record.active { background-color: #eb3a3b; }
 button.play {
     float: right;
     width: 90px;
@@ -78,6 +80,7 @@ button.play {
     overflow: hidden;
     background-color: #303c47;  
 }
+button.play:hover { background-color: #283542; }
 
 .progress-wrapper {
     position: absolute;
@@ -103,16 +106,43 @@ div[data-anim~=progress-base] {
 }
 .progress-wrapper[data-anim~=progress-wrapper] {
     -webkit-animation-duration: 0.01s;
-    -webkit-animation-delay: 5s;
+    -webkit-animation-delay: 10s;
     -webkit-animation-name: progress-wrapper-close;
 }
 .progress-radial[data-anim~=progress-left] {
-    -webkit-animation-duration: 10s;
+    -webkit-animation-duration: 20s;
     -webkit-animation-name: progress-left-spin;
 }
 .progress-radial[data-anim~=progress-right] {
-    -webkit-animation-duration: 5s;
+    -webkit-animation-duration: 10s;
     -webkit-animation-name: progress-right-spin;
+}
+
+.spinner {
+  margin: 0 auto;
+  width: 70px;
+  text-align: center;
+}
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #FFF;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
 }
 
 .notice {
