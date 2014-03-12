@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_GET['title']) && isset($_GET['artist']))
+if (!isset($_GET['title']) || !isset($_GET['artist']))
     exit();
 
 // Call set_include_path() as needed to point to your client library.
@@ -34,7 +34,7 @@ if($videoID != ''):
     <title>Youtube</title>
 </head>
 <body>
-    <iframe width="560" height="315" src="//www.youtube.com/embed/<?php print $videoID; ?>?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/<?php print $videoID; ?>?autoplay=1" frameborder="0" allowfullscreen></iframe>
 </body>
 </html>
 <?php endif; ?>
