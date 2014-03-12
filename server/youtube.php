@@ -31,7 +31,7 @@ if($videoID != ''):
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>Youtube</title>
 </head>
 <body>
     <iframe width="560" height="315" src="//www.youtube.com/embed/<?php print $videoID; ?>?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>
