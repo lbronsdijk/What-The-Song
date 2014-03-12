@@ -19,10 +19,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="landing" style="display:none">
+        <div class="landing">
             <h1 class="shadow-text">Let me find that song for <strong>you</strong>.</h1>
             <div class="capture-section">
-                <button class="record circle shadow animated"></button>
+                <button class="record circle shadow animated transition"></button>
                 <div class="progress-wrapper" data-anim="progress-base progress-wrapper">
                     <div class="progress-radial" data-anim="progress-base progress-left"></div>
                     <div class="progress-radial" data-anim="progress-base progress-right"></div>
@@ -33,7 +33,8 @@
                 </div>
             </div>
         </div>
-        <div class="result">
+        <div class="loader"></div>
+        <div class="result" style="display:none">
             <h1 class="shadow-text">Yeah! I’ve got a <strong>match</strong>.</h1>
             <div class="musicbox rounded-small shadow-medium">
                 <header>
@@ -45,7 +46,7 @@
                         <span class="artist">Stromae</span>
                         <span class="track"><span class="icon listen"></span>Alors On Danse</span>
                     </p>
-                    <button class="play"><span class="icon player-controls play"></span></button>
+                    <button class="play transition"><span class="icon test player-controls play"></span></button>
                 </div>
                 <footer>
                     <ul class="pull-left">
