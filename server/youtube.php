@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_GET['title']))
+if (!isset($_GET['title']) && isset($_GET['artist']))
     exit();
 
 // Call set_include_path() as needed to point to your client library.
@@ -18,7 +18,7 @@ $client->setDeveloperKey($DEVELOPER_KEY);
 $youtube = new Google_YoutubeService($client);
 
 $searchResponse = $youtube->search->listSearch('id,snippet', array(
-    'q' => $_GET['title'],
+    'q' => $_GET['title'] . ' by ' . $_GET['artist'],
     'maxResults' => 1,
     'type' => 'video',
     'order' => 'viewCount'
