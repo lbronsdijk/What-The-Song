@@ -18,7 +18,7 @@ $client->setDeveloperKey($DEVELOPER_KEY);
 $youtube = new Google_YoutubeService($client);
 
 $searchResponse = $youtube->search->listSearch('id,snippet', array(
-    'q' => $_GET['title'] . ' by ' . $_GET['artist'],
+    'q' => $_GET['title'] . '+by+' . $_GET['artist'],
     'maxResults' => 1,
     'type' => 'video',
     'order' => 'viewCount'
