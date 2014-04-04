@@ -1,151 +1,175 @@
+var timeOut = 20000;
+
 /**
- * function.js
- * 
- * @copyright   Copyright (c) 2013 Luc Bronsdijk (http://www.lucbronsdijk.nl)
+ * Initializes the 'landing'
+ *
  */
-
-$(document).ready(function()
+function initLanding()
 {
+    addElements();
 
-    var timeOut = 20000;
-
-    // initialize functions
-    initLanding();
-    initUserSearches();
-    initToggles();
-    
-    /**
-     * Initializes the 'landing'
-     * 
-     */
-    function initLanding() 
+    // trigger record
+    $('button.record').click(function()
     {
-        addElements();
+        // start countdown
+        startCountdown();
+    })
 
-        // trigger record
-        $('button.record').click(function() 
-        {   
-            // start countdown
-            startCountdown();
-        })
+    /**
+     * Adds all animated elements
+     *
+     */
+    function addElements()
+    {
+        $('h1').addClass('animated fadeInDown');
+        $('.notice').addClass('animated fadeIn');
+    }
 
-        /**
-         * Adds all animated elements 
-         * 
-         */
-        function addElements()
+    /**
+     * Handles the countdown
+     *
+     */
+    function startCountdown()
+    {
+        $('.progress-wrapper').css('display', 'block');
+        $('button.record').addClass('active');
+        $('.notice').addClass('fadeOut');
+
+        // sets waiting timeout for 'timeOut' sec
+        setTimeout(function()
         {
-            $('h1').addClass('animated fadeInDown');
-            $('.notice').addClass('animated fadeIn');
-        }
+            $('h1').removeClass('fadeInDown');
+            $('.notice').removeClass('fadeIn');
 
-        /**
-         * Handles the countdown 
-         * 
-         */
-        function startCountdown()
-        {
-            $('.progress-wrapper').css('display', 'block');
-            $('button.record').addClass('active');
-            $('.notice').addClass('fadeOut');
+            $('h1').addClass('fadeOutUp');
 
-            // sets waiting timeout for 'timeOut' sec
-            setTimeout(function() 
-            {
-                $('h1').removeClass('fadeInDown');
-                $('.notice').removeClass('fadeIn');
+            $('.progress-wrapper').fadeOut('fast', function() {
 
-                $('h1').addClass('fadeOutUp');
+                $('button.record').addClass('animated flipOutY');
 
-                $('.progress-wrapper').fadeOut('fast', function() {
+                $('.landing').delay(1000).hide(0, function() {
 
-                    $('button.record').addClass('animated flipOutY');
+                    $('h1').removeClass('fadeOutUp');
+                    $('.landing').detach();
 
-                    $('.landing').delay(1000).hide(0, function() {
-
-                        $('h1').removeClass('fadeOutUp');
-                        $('.landing').detach();
-
-                        initResult();
-                    })
+                    initResult();
                 })
-            }, timeOut);
-            
-        }
+            })
+        }, timeOut);
+
     }
+}
+
+/**
+ * Initializes the results
+ *
+ */
+function initResult()
+{
+    addElements();
+    loader();
 
     /**
-     * Initializes the results
-     * 
+     * Adds all animated elements
+     *
      */
-    function initResult() 
+    function addElements()
     {
-        addElements();
-        loader();
-
-        /**
-         * Adds all animated elements 
-         * 
-         */
-        function addElements()
-        {
-            $('h1').addClass('fadeInDown');
-            $('.musicbox').addClass('animated flipInY');
-        }
-
-        function loader()
-        {
-            var node = '<h1 class=\"shadow-text animated fadeInDown\">Just a sec, I\'m <strong>thinking</strong>.</h1> <div class=\"spinner\"> <div class=\"bounce1\"></div><div class=\"bounce2\"></div> <div class=\"bounce3\"></div></div>';
-
-            $('.loader').append(node);
-
-            setTimeout(function() 
-            {
-
-                $('.loader').fadeOut('fast', function() {
-                    $('.loader').detach();
-                    $('.result').css('display', 'block');
-                })
-
-            }, 3000);
-        }
+        $('h1').addClass('fadeInDown');
+        $('.musicbox').addClass('animated flipInY');
     }
 
-    /**
-     * Loops trough every user search
-     * 
-     */
-    function initUserSearches()
+    function loader()
     {
-        var songs = $(".song");
-        var songsIndex = -1;
-        
-        function nextSong() 
+        var node = '<h1 class=\"shadow-text animated fadeInDown\">Just a sec, I\'m <strong>thinking</strong>.</h1> <div class=\"spinner\"> <div class=\"bounce1\"></div><div class=\"bounce2\"></div> <div class=\"bounce3\"></div></div>';
+
+        $('.loader').append(node);
+
+        setTimeout(function()
         {
-            ++songsIndex;
-            songs.eq(songsIndex % songs.length)
-                .addClass('animated fadeInUp')
-                .css('display', 'block')
-                .delay(5000)
-                .hide(0,0,nextSong);
-        }
-        
-        nextSong();
+
+            $('.loader').fadeOut('fast', function() {
+                $('.loader').detach();
+                $('.result').css('display', 'block');
+            })
+
+        }, 3000);
+    }
+}
+
+/**
+ * Loops trough every user search
+ *
+ */
+function initUserSearches()
+{
+    var songs = $(".song");
+    var songsIndex = -1;
+
+    function nextSong()
+    {
+        ++songsIndex;
+        songs.eq(songsIndex % songs.length)
+            .addClass('animated fadeInUp')
+            .css('display', 'block')
+            .delay(5000)
+            .hide(0,0,nextSong);
     }
 
-    /**
-     * Sets button toggles
-     * 
-     */
-    function initToggles()
+    nextSong();
+}
+
+/**
+ * Sets button toggles
+ *
+ */
+function initToggles()
+{
+    $('button.play').click(function()
     {
-        $('button.play').click(function()
-        {
-            $('.player-controls').toggleClass('pause');
-        })
-        $('.star').click(function()
-        {
-            $(this).toggleClass('active');
-        })
-    }
-})
+        $('.player-controls').toggleClass('pause');
+    })
+    $('.star').click(function()
+    {
+        $(this).toggleClass('active');
+    })
+}
+
+function fbLogin(auth, fb, sHandler, eHandler){
+
+    auth.authenticateWithFacebook(
+            //APP ID
+            '221631931359668',
+            //Permissions
+            ['user_about_me', 'user_checkins']
+        ).done(function(params){
+
+            if (params.accessToken){
+
+                var user, friends;
+                var accessToken = params.accessToken;
+                var session = fb.session;
+
+                facebookUser(accessToken, function(data){
+
+                    user = data;
+
+                    facebookFriends(accessToken,function(data){
+
+                        friends = data;
+
+                        sHandler({user: user, friends: friends, accessToken: accessToken, session: session});
+                    });
+                });
+
+            } else {
+
+                eHandler('No access token returned');
+
+            }}).fail(function(request, error) {
+
+            eHandler('The Authentication request ' + request + ' failed with error: ' + error);
+
+        }
+    );
+}
