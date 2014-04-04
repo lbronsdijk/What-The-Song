@@ -83,12 +83,6 @@ $(document).ready(function()
         addElements();
         loader();
 
-        // if(loader()) {
-        //     console.log('derp');
-        //     $('.result').css('display', 'block');
-        // }
-
-
         /**
          * Adds all animated elements 
          * 
