@@ -21,6 +21,7 @@ function initLanding()
      */
     function addElements()
     {
+        $('.landing').removeClass('hide');
         $('h1').addClass('animated fadeInDown');
         $('.notice').addClass('animated fadeIn');
     }
@@ -52,11 +53,38 @@ function initLanding()
                     $('h1').removeClass('fadeOutUp');
                     $('.landing').detach();
 
-                    initResult();
+                    initLoader();
                 })
             })
         }, timeOut);
 
+    }
+}
+
+function initLoader(){
+
+    addElements();
+
+    function addElements(){
+
+        var loader = $('.loader');
+        loader.removeClass('hide');
+
+        var node = '<h1 class=\"shadow-text animated fadeInDown\">Just a sec, I\'m <strong>thinking</strong>.</h1> <div class=\"spinner\"> <div class=\"bounce1\"></div><div class=\"bounce2\"></div> <div class=\"bounce3\"></div></div>';
+
+        loader.append(node);
+
+        setTimeout(function()
+        {
+
+            $('.loader').fadeOut('fast', function() {
+                $('.loader').detach();
+                $('.result').removeClass('hide');
+
+                initResult();
+            })
+
+        }, 3000);
     }
 }
 
@@ -67,7 +95,6 @@ function initLanding()
 function initResult()
 {
     addElements();
-    loader();
 
     /**
      * Adds all animated elements
@@ -77,23 +104,6 @@ function initResult()
     {
         $('h1').addClass('fadeInDown');
         $('.musicbox').addClass('animated flipInY');
-    }
-
-    function loader()
-    {
-        var node = '<h1 class=\"shadow-text animated fadeInDown\">Just a sec, I\'m <strong>thinking</strong>.</h1> <div class=\"spinner\"> <div class=\"bounce1\"></div><div class=\"bounce2\"></div> <div class=\"bounce3\"></div></div>';
-
-        $('.loader').append(node);
-
-        setTimeout(function()
-        {
-
-            $('.loader').fadeOut('fast', function() {
-                $('.loader').detach();
-                $('.result').css('display', 'block');
-            })
-
-        }, 3000);
     }
 }
 
