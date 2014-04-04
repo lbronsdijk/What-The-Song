@@ -88,7 +88,7 @@ button.play:hover { background-color: #283542; }
     width: 240px;
     height: 240px;
     left: 280px;
-    top: 120px;
+    top: 170px;
     clip: rect(0px, 240px, 240px, 120px);
 }
 .progress-radial {
@@ -106,15 +106,15 @@ div[data-anim~=progress-base] {
 }
 .progress-wrapper[data-anim~=progress-wrapper] {
     -webkit-animation-duration: 0.01s;
-    -webkit-animation-delay: 5s;
+    -webkit-animation-delay: 10s;
     -webkit-animation-name: progress-wrapper-close;
 }
 .progress-radial[data-anim~=progress-left] {
-    -webkit-animation-duration: 10s;
+    -webkit-animation-duration: 20s;
     -webkit-animation-name: progress-left-spin;
 }
 .progress-radial[data-anim~=progress-right] {
-    -webkit-animation-duration: 5s;
+    -webkit-animation-duration: 10s;
     -webkit-animation-name: progress-right-spin;
 }
 
