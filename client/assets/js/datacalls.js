@@ -1,6 +1,3 @@
-// server url is a php file that handles data call requests
-var serverURL = 'http://wts:8888/server/server.php';
-
 /*
  / login data call
  / retrieves user data
@@ -133,7 +130,7 @@ function dataCall(call, data, sHandler, eHandler){
 
     var JSONData = generateJSONData(call, data);
 
-    $.post(serverURL, JSONData, function(data){
+    $.post(serverPHP, JSONData, function(data){
 
         data = JSON.parse(data);
         data.hasOwnProperty('error') ? eHandler(data.error) : sHandler(data);

@@ -4,16 +4,31 @@ var timeOut = 20000;
  * Initializes the 'landing'
  *
  */
-function initLanding()
+function initLanding(models, key)
 {
     addElements();
 
     // trigger record
-    $('button.record').click(function()
-    {
-        // start countdown
-        startCountdown();
-    })
+    $('button.record').click(recordButtonClick);
+
+    // When arguments change, run pages function
+    models.application.addEventListener('arguments', function(){
+
+        var args = models.application.arguments;
+
+        if(args[0] == 'record' && args[1] == key){
+
+            $('button.record').unbind("click");
+            startCountdown();
+        }
+    });
+
+    function recordButtonClick(e){
+
+        e.preventDefault();
+
+        window.location.href = recordPHP + "?key=123456";
+    }
 
     /**
      * Adds all animated elements

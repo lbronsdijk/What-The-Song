@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    window.location.href = "spotify:app:project-03";
+
     require([
         '$api/models',
         '$views/image#Image',
@@ -18,10 +20,17 @@ $(document).ready(function(){
 
                     alert('name: ' + data.name + ' email: ' + data.email);
 
-                    // initialize functions
-                    initLanding();
-                    initUserSearches();
-                    initToggles();
+                    // When application has loaded, run pages function
+                    models.application.load('arguments').done(function(){
+
+                        //fake
+                        var key = '123456';
+
+                        // initialize functions
+                        initLanding(models, key);
+                        initUserSearches();
+                        initToggles();
+                    });
 
                      var title = 'Billie Jean';
                      var artist = 'Michael Jackson';
