@@ -36,15 +36,54 @@ function DataCallsModel(){
     };
 
     /*
-     / track info data call
+     / search track data call
      / retrieves information for a specific track
-     / parameters needed: uri($api/models#Track uri)
+     / parameters needed: title, artistName, sHandler, artistModel($api/models#Artist)
     */
-    this.trackInfo = function trackInfo(uri, sHandler){
+    this.searchTrack = function searchTrack(title, artistName, sHandler, artistModel){
 
-        var source = 'http://ws.spotify.com/lookup/1/.json?uri=' + uri;
-        $.getJSON(source, function(data){sHandler(data)});
-    };
+        var source = 'http://ws.spotify.com/search/1/track.json?q=' + title;
+
+        var tracks = [];
+
+        $.getJSON(source, function(data){
+
+            for(var i = 0; i < data.tracks.length; i++){
+
+                for(var j = 0; j < data.tracks[i].artists.length; j++){
+
+                    if(data.tracks[i].artists[j].name == artistName){
+
+                        data.tracks[i].artist = data.tracks[i].artists[j];
+                        break;
+                    }
+                }
+
+                delete data.tracks[i].artists;
+                tracks.push(data.tracks[i]);
+            }
+
+            var track = null;
+            var popularity = 0;
+
+            for(var i = 0; i < tracks.length; i++){
+
+                if(tracks[i].popularity > popularity){
+                    track = tracks[i];
+                    popularity = tracks[i].popularity;
+                }
+            }
+
+            if(track.artist.name == artistName){
+
+                artistModel.fromURI(track.artist.href).load('name', 'image').done(function(artist) {
+
+                    track.artist = artist;
+                    sHandler(track);
+                });
+            }
+        });
+    }
 
     /*
      / track info for tracks from a playlist data call

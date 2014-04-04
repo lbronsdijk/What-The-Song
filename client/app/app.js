@@ -5,19 +5,30 @@ $(document).ready(function(){
         '$views/image#Image',
         '$api/auth',
         '$api/facebook'
-    ], function(models, Image, auth, facebook) {
+    ],
+        function(models, Image, auth, facebook) {
 
-        var fb = new FacebookController(auth, facebook, function(data){
+        var navigationController = new NavigationController(models);
+        var dataCalls = new DataCallsModel();
 
-            console.log(data);
+        FacebookController(auth, facebook, function(data){
 
-            var navigationController = new NavigationController(models);
+            var fb = data;
 
-            var dataCalls = new DataCallsModel();
+            console.log(fb);
 
-            dataCalls.accountFromFacebookID('100001566806807', function(data){
+            dataCalls.accountFromFacebookID(fb.user.id, function(data){
 
                 alert('name: ' + data.name + ' email: ' + data.email);
+
+                var title = 'Billie Jean';
+                var artist = 'Michael Jackson';
+
+                dataCalls.searchTrack(title, artist, function(data){
+
+                    console.log(data);
+
+                }, models.Artist);
 
             }, function(errorThrown){
 

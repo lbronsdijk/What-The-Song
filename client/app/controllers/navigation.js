@@ -1,6 +1,6 @@
 function NavigationController(models){
 
-    function tabs(){
+    /*function tabs(){
 
         var args = models.application.arguments;
 
@@ -27,5 +27,5 @@ function NavigationController(models){
     models.application.load('arguments').done(tabs);
 
     // When arguments change, run pages function
-    models.application.addEventListener('arguments', tabs);
+    models.application.addEventListener('arguments', tabs);*/
 }
