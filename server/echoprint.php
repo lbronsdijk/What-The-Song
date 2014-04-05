@@ -5,16 +5,23 @@ if(isset($_FILES['file']) && !$_FILES['file']['error']
     && isset($_POST['filename'])
     && isset($_POST['key'])){
 
-    //TODO: check if key already exists in database
-    //echo json_encode(array('error' => 'Key already exists'));
-    //exit;
-
-    //save recorded wav file
+    //post parameters
     $filename = $_POST['filename'];
     $key =  $_POST['key'];
 
-    $wav_file_url = "recordings/" . $filename;
+    //check if key already exists in database
+    $num_of_keys = selectQuery(
+       'SELECT rid FROM requests WHERE rid=:rid',
+        array(':rid' => $key)
+    );
 
+    if(count($num_of_keys) > 0){
+        echo json_encode(array('error' => 'Key already exists'));
+        exit;
+    }
+
+    //save recorded wav file
+    $wav_file_url = "recordings/" . $filename;
     move_uploaded_file($_FILES['file']['tmp_name'], $wav_file_url);
 
     //TODO: generate code string with echoprint from wav file
@@ -42,7 +49,11 @@ if(isset($_FILES['file']) && !$_FILES['file']['error']
 
     $result = curl_exec($ch);
 
-    //TODO: save result with key in database
+    //save result with key in database
+    transactionQuery(
+       'INSERT INTO requests (rid, result) VALUES (:rid, :result)',
+        array(':rid' => $key, ':result' => $result)
+    );
 
     //echo success message
     echo json_encode(array('success' => 'Found a result! Successfully stored in the database with key: ' . $key));
