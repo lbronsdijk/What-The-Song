@@ -1,5 +1,13 @@
 <?php
 
+// check ffmpeg version
+$ffmpeg = trim(shell_exec('which ffmpeg'));
+
+if (empty($ffmpeg))
+{
+    die('ffmpeg not available');
+}
+
 // execute echoprint-codegen bin through php
 // using ./echoprint-codegen
 $json = shell_exec('./echoprint-codegen audio.mp3');
