@@ -11,4 +11,5 @@ Echoprint Codegen vereist FFMPEG voor de conversie van audio. Indien je MAMP geb
 * Maak vervolgens een symlink (alias) aan binnen de library van mamp. Open hiervoor je terminal.
     * Navigeer naar de MAMP directory: `cd /Applications/MAMP/Library/bin`
     * Maak de symlink aan: `ln -s /usr/local/Cellar/ffmpeg/1.2.4/bin/ffmpeg ffmpeg` of `ln -s /usr/local/Cellar/ffmpeg/2.2/bin/ffmpeg ffmpeg`.
+* Restart MAMP
 * Test of het PHP script geen errors terug geeft als "could not decode".
