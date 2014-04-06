@@ -3,12 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 11 mrt 2014 om 10:22
+-- Genereertijd: 06 apr 2014 om 21:41
 -- Serverversie: 5.5.33
 -- PHP-versie: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Databank: `spotify`
@@ -20,75 +26,47 @@ SET time_zone = "+00:00";
 -- Tabelstructuur voor tabel `accounts`
 --
 
-CREATE TABLE IF NOT EXISTS `accounts` (
-  `fbid` varchar(25) COLLATE utf8_bin NOT NULL,
-  `name` varchar(50) COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+CREATE TABLE `accounts` (
+  `fbid` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
   PRIMARY KEY (`fbid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `accounts`
 --
 
 INSERT INTO `accounts` (`fbid`, `name`, `email`) VALUES
+('100000975819825', 'Luc Bronsdijk', 'info@lucbronsdijk.nl'),
 ('100001566806807', 'Lloyd Keijzer', 'lloyd_msn@live.nl');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `artist`
+-- Tabelstructuur voor tabel `results`
 --
 
-CREATE TABLE IF NOT EXISTS `artist` (
-  `aid` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8_bin NOT NULL,
-  `uri` varchar(250) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`aid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `search`
---
-
-CREATE TABLE IF NOT EXISTS `search` (
-  `fbid` varchar(25) COLLATE utf8_bin NOT NULL,
-  `tid` int(11) NOT NULL,
+CREATE TABLE `results` (
+  `rid` int(11) NOT NULL,
+  `fbid` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `artist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `search.fbid` (`fbid`),
-  KEY `search.tid` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `tracks`
---
-
-CREATE TABLE IF NOT EXISTS `tracks` (
-  `tid` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) COLLATE utf8_bin NOT NULL,
-  `uri` varchar(250) COLLATE utf8_bin NOT NULL,
-  `aid` int(11) NOT NULL,
-  PRIMARY KEY (`tid`),
-  KEY `tracks.aid` (`aid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`rid`),
+  KEY `results.fbid` (`fbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Beperkingen voor gedumpte tabellen
 --
 
 --
--- Beperkingen voor tabel `search`
+-- Beperkingen voor tabel `results`
 --
-ALTER TABLE `search`
-  ADD CONSTRAINT `search_ibfk_3` FOREIGN KEY (`fbid`) REFERENCES `accounts` (`fbid`),
-  ADD CONSTRAINT `search_ibfk_2` FOREIGN KEY (`tid`) REFERENCES `tracks` (`tid`);
+ALTER TABLE `results`
+  ADD CONSTRAINT `results.fbid` FOREIGN KEY (`fbid`) REFERENCES `accounts` (`fbid`);
 
---
--- Beperkingen voor tabel `tracks`
---
-ALTER TABLE `tracks`
-  ADD CONSTRAINT `tracks_ibfk_1` FOREIGN KEY (`aid`) REFERENCES `artist` (`aid`);
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
