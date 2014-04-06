@@ -164,7 +164,7 @@ function fbLogin(auth, fb, sHandler, eHandler){
 
     auth.authenticateWithFacebook(
             //APP ID
-            '221631931359668',
+            '656763861026331',
             //Permissions
             ['user_about_me', 'user_checkins']
         ).done(function(params){

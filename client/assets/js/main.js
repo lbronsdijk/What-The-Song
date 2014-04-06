@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    window.location.href = "spotify:app:project-03";
+    window.location.href = "spotify:app:what-the-song";
 
     require([
         '$api/models',
