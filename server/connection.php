@@ -79,7 +79,3 @@ function transactionQuery($query, $variables = null){
 
     $pdo = null;
 }
-
-/* test connection:
- * var_dump(selectQuery('SELECT * FROM accounts'));
-*/
