@@ -7,11 +7,11 @@
         "en": "What The Song. Let me find that song."
     },
     "AppIcon": {
-        "18x18": "assets/img/icons/icon-18x18.png",
-        "32x32": "assets/img/icons/icon-32x32.png",
-        "64x64": "assets/img/icons/icon-64x64.png",
-        "128x128": "assets/img/icons/icon-128x128.png",
-        "300x300": "assets/img/icons/icon-300x300.png"
+        "18x18": "assets/img/icon/icon-18x18.png",
+        "32x32": "assets/img/icon/icon-32x32.png",
+        "64x64": "assets/img/icon/icon-64x64.png",
+        "128x128": "assets/img/icon/icon-128x128.png",
+        "300x300": "assets/img/icon/icon-300x300.png"
     },
     "AcceptedLinkTypes": [
         "playlist"
