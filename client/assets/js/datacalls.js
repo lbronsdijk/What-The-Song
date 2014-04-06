@@ -35,28 +35,13 @@ facebookFriends = function facebookFriends(accessToken, sHandler){
  / retrieves information for a specific track
  / parameters needed: title, artistName, sHandler, artistModel($api/models#Artist)
  */
-searchTrack = function searchTrack(title, artistName, sHandler, artistModel){
+searchTrack = function searchTrack(title, sHandler, artistModel){
 
     var source = 'http://ws.spotify.com/search/1/track.json?q=' + title;
 
-    var tracks = [];
-
     $.getJSON(source, function(data){
 
-        for(var i = 0; i < data.tracks.length; i++){
-
-            for(var j = 0; j < data.tracks[i].artists.length; j++){
-
-                if(data.tracks[i].artists[j].name == artistName){
-
-                    data.tracks[i].artist = data.tracks[i].artists[j];
-                    break;
-                }
-            }
-
-            delete data.tracks[i].artists;
-            tracks.push(data.tracks[i]);
-        }
+        var tracks = data.tracks;
 
         var track = null;
         var popularity = 0;
@@ -69,14 +54,14 @@ searchTrack = function searchTrack(title, artistName, sHandler, artistModel){
             }
         }
 
-        if(track.artist.name == artistName){
+        track.artist = track.artists[0];
+        delete track.artists;
 
-            artistModel.fromURI(track.artist.href).load('name', 'image').done(function(artist) {
+        artistModel.fromURI(track.artist.href).load('name', 'image').done(function(artist) {
 
-                track.artist = artist;
-                sHandler(track);
-            });
-        }
+            track.artist = artist;
+            sHandler(track);
+        });
     });
 }
 
@@ -98,6 +83,11 @@ trackInfoForTracksFromPlaylist = function trackInfoForTracksFromPlaylist(uri, mo
         });
     });
 };
+
+checkStatus = function checkStatus(key, sHandler, eHandler){
+
+    dataCall('checkStatus', {key: key}, sHandler, eHandler);
+}
 
 /*
  / generate json data

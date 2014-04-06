@@ -24,6 +24,28 @@ function accountFromFacebookID($fbid){
     response(array('fbid' => $account->fbid, 'name' => $account->name, 'email' => $account->email));
 }
 
+function checkStatus($key){
+
+    $result = selectQuery(
+        'SELECT title, artist FROM results WHERE rid=:rid',
+        array(':rid' => $key),
+        false
+    );
+
+    if($result && $result->title != null && $result->artist != null){
+
+        response(array('status' => 'found result', 'title' => $result->title, 'artist' => $result->artist));
+
+    } else if($result && ($result->title == null || $result->artist == null)) {
+
+        response(array('status' => 'no result'));
+
+    } else {
+
+        response(array('status' => 'thinking'));
+    }
+}
+
 //call processor
 
 switch($_POST['call']){
@@ -35,6 +57,11 @@ switch($_POST['call']){
     case 'accountFromFacebookID':
         $fbid = $_POST['data']['fbid'];
         accountFromFacebookID($fbid);
+        break;
+
+    case 'checkStatus':
+        $key = $_POST['data']['key'];
+        checkStatus($key);
         break;
 }
 

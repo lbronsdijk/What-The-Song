@@ -1,6 +1,7 @@
 <?php
-if(!isset($_GET['key'])) exit;
+if(!isset($_GET['key']) || !isset($_GET['fbid'])) exit;
 $key = $_GET['key'];
+$fbid = $_GET['fbid'];
 ?>
 <!doctype html>
 <html>
@@ -11,6 +12,7 @@ $key = $_GET['key'];
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         var key = '<?php print $key; ?>';
+        var fbid = '<?php print $fbid; ?>';
         var echoprintPHP = 'http://wts:8888/server/echoprint.php';
 
         var audioContext = new AudioContext();
@@ -35,7 +37,7 @@ $key = $_GET['key'];
         }
 
         function doneEncoding( blob ) {
-            Recorder.setupDownload( blob, key, echoprintPHP);
+            Recorder.setupDownload( blob, key, fbid, echoprintPHP);
             recIndex++;
         }
 
@@ -60,7 +62,7 @@ $key = $_GET['key'];
 
         function gotStream(stream) {
 
-            window.location.href = 'spotify:app:project-03:record:<?php print $key; ?>';
+            window.location.href = 'spotify:app:what-the-song:record:<?php print $key; ?>';
 
             inputPoint = audioContext.createGain();
 

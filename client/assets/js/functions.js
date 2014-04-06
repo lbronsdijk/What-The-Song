@@ -4,7 +4,7 @@ var timeOut = 20000;
  * Initializes the 'landing'
  *
  */
-function initLanding(models, key)
+function initLanding(models, key, fbid)
 {
     addElements();
 
@@ -27,7 +27,7 @@ function initLanding(models, key)
 
         e.preventDefault();
 
-        window.location.href = recordPHP + "?key=123456";
+        window.location.href = recordPHP + "?key=" + key + "&fbid=" + fbid;
     }
 
     /**
@@ -68,7 +68,7 @@ function initLanding(models, key)
                     $('h1').removeClass('fadeOutUp');
                     $('.landing').detach();
 
-                    initLoader();
+                    initLoader(key, models);
                 })
             })
         }, timeOut);
@@ -76,7 +76,7 @@ function initLanding(models, key)
     }
 }
 
-function initLoader(){
+function initLoader(key, models){
 
     addElements();
 
@@ -89,17 +89,43 @@ function initLoader(){
 
         loader.append(node);
 
+        thinking();
+    }
+
+    function thinking(){
+
         setTimeout(function()
         {
+            checkStatus(key, function(data){
 
-            $('.loader').fadeOut('fast', function() {
-                $('.loader').detach();
-                $('.result').removeClass('hide');
+                switch(data.status){
 
-                initResult();
-            })
+                    case 'found result':
+                        console.log('found result');
+                        $('.loader').fadeOut('fast', function() {
+                            $('.loader').detach();
+                            $('.result').removeClass('hide');
 
-        }, 3000);
+                            initResult(models, data.title, data.artist);
+                        });
+                        break;
+
+                    case 'no result':
+                        console.log('no result');
+                        break;
+
+                    case 'thinking':
+                        console.log('still thinking');
+                        thinking();
+                        break;
+                }
+
+            }, function(errorThrown){
+
+                alert('errorThrown: ' + errorThrown);
+            });
+
+        }, 1000);
     }
 }
 
@@ -107,8 +133,16 @@ function initLoader(){
  * Initializes the results
  *
  */
-function initResult()
+function initResult(models, title, artist)
 {
+    console.log('title: ' + title + ' artist: ' + artist);
+
+    searchTrack(title, function(data){
+
+        console.log(data);
+
+    }, models.Artist);
+
     addElements();
 
     /**

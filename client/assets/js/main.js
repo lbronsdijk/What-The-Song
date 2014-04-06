@@ -27,19 +27,10 @@ $(document).ready(function(){
                         var key = '123456';
 
                         // initialize functions
-                        initLanding(models, key);
+                        initLanding(models, key, fb.user.id);
                         initUserSearches();
                         initToggles();
                     });
-
-                     var title = 'Billie Jean';
-                     var artist = 'Michael Jackson';
-
-                     searchTrack(title, artist, function(data){
-
-                        console.log(data);
-
-                     }, models.Artist);
 
                 }, function(errorThrown){
 

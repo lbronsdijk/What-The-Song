@@ -96,11 +96,12 @@ DEALINGS IN THE SOFTWARE.
     this.node.connect(this.context.destination);   // if the script node is not connected to an output the "onaudioprocess" event is not triggered in chrome.
   };
 
-  Recorder.setupDownload = function(blob, key, echoprintPHP){
+  Recorder.setupDownload = function(blob, key, fbid, echoprintPHP){
 
       var filename = key + '_recording.wav';
 
       var data = new FormData();
+      data.append('fbid', fbid);
       data.append('key', key);
       data.append('filename', filename);
       data.append('file', blob);
