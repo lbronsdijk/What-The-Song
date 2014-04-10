@@ -155,8 +155,8 @@ function initResult(models, fb, title, artist)
 
         $('h1').addClass('fadeInDown');
         $('.musicbox').addClass('animated flipInY');
-        $('#title').innerHTML = data.name;
-        $('#artist').innerHTML = data.artist.name;
+        $('#title').html( data.name );
+        $('#artist').html( data.artist.name );
 
         var track = models.Track.fromURI(data.href);
 
@@ -228,7 +228,7 @@ function initResult(models, fb, title, artist)
                         "Share": function() {
 
                             fb.session.post(
-                                fb.user.name + ' found ' + title + ' by ' + artist + ', using What The Song?! in Spotify.',
+                                fb.user.name + ' found ' + data.name + ' by ' + data.artist.name + ', using What The Song?! in Spotify.',
                                 models.Track.fromURI(data.href)
                             );
 
