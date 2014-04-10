@@ -155,6 +155,8 @@ function initResult(models, fb, title, artist)
 
         $('h1').addClass('fadeInDown');
         $('.musicbox').addClass('animated flipInY');
+        $('#title').innerHTML = data.name;
+        $('#artist').innerHTML = data.artist.name;
 
         var track = models.Track.fromURI(data.href);
 
