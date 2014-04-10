@@ -28,7 +28,7 @@ $(document).ready(function(){
                             var key = data.key;
 
                             // initialize functions
-                            initLanding(models, key, fb.user.id);
+                            initLanding(models, key, fb);
                             initUserSearches();
                             initToggles();
 

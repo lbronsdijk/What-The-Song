@@ -4,7 +4,7 @@ var timeOut = 20000;
  * Initializes the 'landing'
  *
  */
-function initLanding(models, key, fbid)
+function initLanding(models, key, fb)
 {
     addElements();
 
@@ -27,7 +27,7 @@ function initLanding(models, key, fbid)
 
         e.preventDefault();
 
-        window.location.href = recordPHP + "?key=" + key + "&fbid=" + fbid;
+        window.location.href = recordPHP + "?key=" + key + "&fbid=" + fb.user.id;
     }
 
     /**
@@ -68,7 +68,7 @@ function initLanding(models, key, fbid)
                     $('h1').removeClass('fadeOutUp');
                     $('.landing').detach();
 
-                    initLoader(key, models);
+                    initLoader(key, models, fb);
                 })
             })
         }, timeOut);
@@ -76,7 +76,7 @@ function initLanding(models, key, fbid)
     }
 }
 
-function initLoader(key, models){
+function initLoader(key, models, fb){
 
     addElements();
 
@@ -106,7 +106,7 @@ function initLoader(key, models){
                             $('.loader').detach();
                             $('.result').removeClass('hide');
 
-                            initResult(models, data.title, data.artist);
+                            initResult(models, fb, data.title, data.artist);
                         });
                         break;
 
@@ -133,7 +133,7 @@ function initLoader(key, models){
  * Initializes the results
  *
  */
-function initResult(models, title, artist)
+function initResult(models, fb, title, artist)
 {
 
     var play = false;
@@ -155,6 +155,13 @@ function initResult(models, title, artist)
 
         $('h1').addClass('fadeInDown');
         $('.musicbox').addClass('animated flipInY');
+
+        var track = models.Track.fromURI(data.href);
+
+        if(track.starred){
+
+            $('#star-btn').addClass('active');
+        }
     }
 
     function addEvents(data){
@@ -166,11 +173,13 @@ function initResult(models, title, artist)
             if(!play){
 
                 models.player.playTrack(models.Track.fromURI(data.href));
+
                 play = true;
 
             } else {
 
                 models.player.pause();
+
                 play = false;
             }
 
@@ -181,6 +190,57 @@ function initResult(models, title, artist)
             e.preventDefault();
 
             window.location.href = youtubePHP + "?title=" + title + "&artist=" + artist;
+        });
+
+        $('#star-btn').click(function(e){
+
+            var track = models.Track.fromURI(data.href);
+
+            if(track.starred){
+
+                track.unstar();
+
+            } else {
+
+                track.star();
+            }
+        });
+
+        $('#share-btn').click(function(e){
+
+            $("body").append('<div id="dialog" title="Share on Facebook?"><p>Do you want to share your results with your friends on Facebook?</p></div>');
+
+            $(function() {
+                $("#dialog").dialog({
+                    resizable: false,
+                    height:200,
+                    modal: true,
+                    close: function(e){
+
+                        e.preventDefault();
+
+                        $( this ).dialog( "close" );
+                        $( this ).remove();
+                    },
+                    buttons: {
+                        "Share": function() {
+
+                            fb.session.post(
+                                fb.user.name + ' found ' + title + ' by ' + artist + ', using What The Song?! in Spotify.',
+                                models.Track.fromURI(data.href)
+                            );
+
+                            $( this ).dialog( "close" );
+                            $( this ).remove();
+                        },
+                        Cancel: function() {
+
+                            $( this ).dialog( "close" );
+                            $( this ).remove();
+                        }
+                    }
+                });
+            });
         });
     }
 }
