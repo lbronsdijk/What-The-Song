@@ -8,6 +8,11 @@ accountFromFacebookID = function accountFromFacebookID(fbid, sHandler, eHandler)
     dataCall('accountFromFacebookID', {fbid: fbid}, sHandler, eHandler);
 };
 
+getKey = function getKey(sHandler, eHandler){
+
+    dataCall('getKey', {}, sHandler, eHandler);
+};
+
 /*
  / facebook user data call
  / retrieves facebook user data

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    //fix for record button not resetting
     window.location.href = "spotify:app:what-the-song";
 
     require([
@@ -14,8 +15,6 @@ $(document).ready(function(){
 
                 var fb = data;
 
-                //console.log(fb);
-
                 accountFromFacebookID(fb.user.id, function(data){
 
                     alert('name: ' + data.name + ' email: ' + data.email);
@@ -23,23 +22,28 @@ $(document).ready(function(){
                     // When application has loaded, run pages function
                     models.application.load('arguments').done(function(){
 
-                        //fake
-                        var key = '123456';
+                        //generate key
+                        getKey(function(data){
 
-                        // initialize functions
-                        initLanding(models, key, fb.user.id);
-                        initUserSearches();
-                        initToggles();
+                            var key = data.key;
+
+                            // initialize functions
+                            initLanding(models, key, fb.user.id);
+                            initUserSearches();
+                            initToggles();
+
+                        }, function(errorThrown){
+
+                            alert('errorThrown: ' + errorThrown);
+                        });
                     });
-
                 }, function(errorThrown){
 
                     alert('errorThrown: ' + errorThrown);
                 });
-
             }, function(errorThrown){
 
-                console.log(errorThrown);
+                alert('errorThrown: ' + errorThrown);
             });
         });
 });

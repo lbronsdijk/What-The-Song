@@ -46,6 +46,24 @@ function checkStatus($key){
     }
 }
 
+function getKey(){
+
+    $key = substr(md5(microtime()), rand(0, 26), 6);
+
+    if(selectQuery(
+        'SELECT rid FROM results WHERE rid=:rid',
+        array(':rid' => $key),
+        false
+    )){
+
+        getKey();
+
+    } else {
+
+        response(array('key' => $key));
+    }
+}
+
 //call processor
 
 switch($_POST['call']){
@@ -62,6 +80,10 @@ switch($_POST['call']){
     case 'checkStatus':
         $key = $_POST['data']['key'];
         checkStatus($key);
+        break;
+
+    case 'getKey':
+        getKey();
         break;
 }
 

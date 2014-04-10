@@ -135,24 +135,53 @@ function initLoader(key, models){
  */
 function initResult(models, title, artist)
 {
-    console.log('title: ' + title + ' artist: ' + artist);
+
+    var play = false;
 
     searchTrack(title, function(data){
 
         console.log(data);
 
-    }, models.Artist);
+        addElements(data);
+        addEvents(data);
 
-    addElements();
+    }, models.Artist);
 
     /**
      * Adds all animated elements
      *
      */
-    function addElements()
-    {
+    function addElements(data) {
+
         $('h1').addClass('fadeInDown');
         $('.musicbox').addClass('animated flipInY');
+    }
+
+    function addEvents(data){
+
+        $('#play-btn').click(function(e){
+
+            e.preventDefault();
+
+            if(!play){
+
+                models.player.playTrack(models.Track.fromURI(data.href));
+                play = true;
+
+            } else {
+
+                models.player.pause();
+                play = false;
+            }
+
+        });
+
+        $('#video-btn').click(function(e){
+
+            e.preventDefault();
+
+            window.location.href = youtubePHP + "?title=" + title + "&artist=" + artist;
+        });
     }
 }
 
