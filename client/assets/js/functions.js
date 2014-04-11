@@ -4,7 +4,7 @@ var timeOut = 20000;
  * Initializes the 'landing'
  *
  */
-function initLanding(models, key, fb)
+function initLanding(models, key, fb, Image)
 {
     addElements();
 
@@ -68,7 +68,7 @@ function initLanding(models, key, fb)
                     $('h1').removeClass('fadeOutUp');
                     $('.landing').detach();
 
-                    initLoader(key, models, fb);
+                    initLoader(key, models, fb, Image);
                 })
             })
         }, timeOut);
@@ -76,7 +76,7 @@ function initLanding(models, key, fb)
     }
 }
 
-function initLoader(key, models, fb){
+function initLoader(key, models, fb, Image){
 
     addElements();
 
@@ -106,7 +106,7 @@ function initLoader(key, models, fb){
                             $('.loader').detach();
                             $('.result').removeClass('hide');
 
-                            initResult(models, fb, data.title, data.artist);
+                            initResult(models, fb, Image, data.title, data.artist);
                         });
                         break;
 
@@ -133,7 +133,7 @@ function initLoader(key, models, fb){
  * Initializes the results
  *
  */
-function initResult(models, fb, title, artist)
+function initResult(models, fb, Image, title, artist)
 {
 
     var play = false;
@@ -141,6 +141,7 @@ function initResult(models, fb, title, artist)
     searchTrack(title, function(data){
 
         console.log(data);
+        console.log('artist images: ' + data.artist.images);
 
         addElements(data);
         addEvents(data);
@@ -155,8 +156,28 @@ function initResult(models, fb, title, artist)
 
         $('h1').addClass('fadeInDown');
         $('.musicbox').addClass('animated flipInY');
+
         $('#title').html( data.name );
         $('#artist').html( data.artist.name );
+
+        if (typeof data.artist.images != 'undefined') {
+
+            if(data.artist.images.length >= 3){
+
+                $('#artist-img').attr('src', data.artist.images[2][1]);
+
+            } else {
+
+                $('#artist-img').attr('src', data.artist.image);
+            }
+        }
+
+        var album = models.Album.fromURI(data.album.href);
+
+        album.load('image').done(function(album) {
+
+            $('#album-img').attr('src', album.image);
+        });
 
         var track = models.Track.fromURI(data.href);
 
