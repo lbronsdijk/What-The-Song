@@ -73,6 +73,14 @@ button.record {
 }
 button.record:hover,
 button.record.active { background-color: #eb3a3b; }
+button.reload {
+    width: 240px;
+    height: 240px;
+    background: url(/assets/img/reload@1x.png) center center no-repeat #fc4a4b;
+    overflow: hidden;
+}
+button.reload:hover,
+button.reload.active { background-color: #eb3a3b; }
 button.play {
     float: right;
     width: 90px;
