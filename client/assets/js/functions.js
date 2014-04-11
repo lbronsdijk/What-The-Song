@@ -112,6 +112,12 @@ function initLoader(key, models, fb, Image){
 
                     case 'no result':
                         console.log('no result');
+                        $('.loader').fadeOut('fast', function() {
+                            $('.loader').detach();
+                            $('.error').removeClass('hide');
+
+                            initNoResult(models, fb, Image);
+                        });
                         break;
 
                     case 'thinking':
@@ -126,6 +132,30 @@ function initLoader(key, models, fb, Image){
             });
 
         }, 1000);
+    }
+}
+
+function initNoResult(models, fb, Image){
+
+    addElements();
+    addEvents();
+
+    function addElements() {
+
+        $('h1').addClass('fadeInDown');
+    }
+
+    function addEvents(){
+
+        var clicked = false;
+
+        $('#retry-btn').click(function(e){
+
+            e.preventDefault();
+
+            window.location.href = "spotify:app:what-the-song";
+            window.location.reload();
+        });
     }
 }
 
