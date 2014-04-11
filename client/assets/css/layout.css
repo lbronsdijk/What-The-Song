@@ -176,7 +176,7 @@ div[data-anim~=progress-base] {
 .musicbox .artwork              { float: left; margin: -67px 0px 0px 30px; border: 6px solid #FFF; height: 116px; width: 116px; }
 .musicbox p                     { float: left; color: #FFF; font-weight: 700; margin: 18px 0px 0px 33px; line-height: 22px; }
 .musicbox p .artist             { font-size: 14px; text-transform: uppercase; display: block; margin-left: 27px; }
-.musicbox p .track              { font-size: 22px; text-transform: initial; }
+.musicbox p .track              { font-size: 22px; text-transform: initial; display: inline-block; max-width: 319px; white-space: nowrap; word-wrap: normal; -o-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden; }
 .musicbox p .listen             { margin-right: 11px; }
 .musicbox footer                { float: left; position: initial; height: 45px; padding: 0; background: #21e4b8; }
 .musicbox footer ul             { padding: 14px 30px; }
