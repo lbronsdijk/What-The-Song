@@ -17,8 +17,6 @@ $(document).ready(function(){
 
                 accountFromFacebookID(fb.user.id, function(data){
 
-                    alert('name: ' + data.name + ' email: ' + data.email);
-
                     // When application has loaded, run pages function
                     models.application.load('arguments').done(function(){
 
