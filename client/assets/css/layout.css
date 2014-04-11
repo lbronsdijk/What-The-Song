@@ -171,8 +171,9 @@ div[data-anim~=progress-base] {
     text-align: initial;
 }
 .musicbox header                { float: left; height: 240px; }
+.musicbox header img            { min-height: 240px; min-width: 600px; }
 .musicbox .main                 { float: left; height: 90px; width: 100%; background: #fc4a4b; overflow: visible; }
-.musicbox .artwork              { float: left; margin: -67px 0px 0px 30px; border: 6px solid #FFF; }
+.musicbox .artwork              { float: left; margin: -67px 0px 0px 30px; border: 6px solid #FFF; height: 116px; width: 116px; }
 .musicbox p                     { float: left; color: #FFF; font-weight: 700; margin: 18px 0px 0px 33px; line-height: 22px; }
 .musicbox p .artist             { font-size: 14px; text-transform: uppercase; display: block; margin-left: 27px; }
 .musicbox p .track              { font-size: 22px; text-transform: initial; }
@@ -194,7 +195,7 @@ footer {
     width: 100%;
     bottom: 0;
     color: #FFF;
-    padding: 50px 60px;
+    padding: 20px 30px;
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
